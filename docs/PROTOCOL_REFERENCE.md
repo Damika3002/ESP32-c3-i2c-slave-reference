@@ -49,10 +49,10 @@ This protocol is designed for:
 ### Slave Response (6 bytes)
 
 ```
-+--------+--------+--------+--------+--------+--------+
-| Marker | Status | Command| Value  |Sequence |Checksum|
-| 0xA5   | 0xNN   | 0xNN   | 0xNN   | 0xNN   | 0xNN   |
-+--------+--------+--------+--------+--------+--------+
++--------+--------+--------+--------+--------+----------+
+| Marker | Status | Command| Value  |Sequence |Checksum |
+| 0xA5   | 0xNN   | 0xNN   | 0xNN   | 0xNN   | 0xNN     |
++--------+--------+--------+--------+--------+----------+
 ```
 
 ---
@@ -88,9 +88,9 @@ The command byte tells the slave what action to perform or what data to return.
 
 ### Byte 0: Response Marker
 
-| Value | Description |
-|-------|-------------|
-| 0xA5 | Valid response marker |
+| Value | Description           |
+|-------|-----------------------|
+| 0xA5  | Valid response marker |
 
 The master should validate that byte 0 is `0xA5`. Any other value indicates stale or shifted data.
 
