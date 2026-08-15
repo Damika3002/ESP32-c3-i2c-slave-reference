@@ -288,14 +288,6 @@ JSON format at 1 Hz:
 - [Radxa ROCK 5C Documentation](https://radxa.com/rock-5c)
 - [Linux I2C Documentation](https://www.kernel.org/doc/html/latest/i2c/index.html)
 
-## Next Steps
-
-After completing this example:
-
-1. **Add fan control logic** - Use Radxa temperatures to control PWM fan on ESP32
-2. **Implement temperature alerts** - Trigger GPIO when temperature exceeds threshold
-3. **Log telemetry data** - Save JSON output to file on Radxa
-4. **Create monitoring dashboard** - Real-time graph of temperatures
 
 ---
 
