@@ -1,0 +1,61 @@
+// ============================================================================
+// Radxa ROCK 5C I2C6 Device Tree Overlay
+// ============================================================================
+//
+// Purpose:
+//   Sets the I2C6 bus clock-frequency to 50 kHz for ESP32-C3 slave testing.
+//
+// Hardware:
+//   - Radxa ROCK 5C (RK3588S)
+//   - I2C6 controller at address 0xfec80000
+//   - ESP32-C3FH4 slave at address 0x08
+//
+// Important:
+//   This overlay sets the REQUESTED frequency. The actual SCL waveform
+//   may differ due to clock divider rounding, bus capacitance, and
+//   pull-up resistor values. Verify with a logic analyzer or oscilloscope.
+//
+// Usage:
+//   1. Compile:
+//      dtc -@ -I dts -O dtbo -o i2c6-50k-overlay.dtbo i2c6-50k-overlay.dts
+//
+//   2. Copy to overlay directory:
+//      sudo cp i2c6-50k-overlay.dtbo /boot/dtb/rockchip/overlay/
+//
+//   3. Add to boot configuration:
+//      sudo nano /boot/armbianEnv.txt
+//      Add: user_overlays=i2c6-50k-overlay
+//
+//   4. Reboot:
+//      sudo reboot
+//
+//   5. Verify:
+//      NODE=$(readlink -f /sys/class/i2c-adapter/i2c-6/device/of_node)
+//      echo "$NODE"
+//      od -An -tu4 "$NODE/clock-frequency"
+//      # Should output: 50000
+//
+// To Restore:
+//   Remove the overlay name from /boot/armbianEnv.txt and reboot.
+//   See radxa/PROCEDURE.md for full restore instructions.
+//
+// Note:
+//   If the label i2c6 is not available in your device tree, use the
+//   fragment-style overlay targeting the node by path instead.
+//   See radxa/PROCEDURE.md for alternative overlay formats.
+//
+// Author: Damika3002
+// Repository: https://github.com/Damika3002/ESP32-c3-i2c-slave-reference
+// License: MIT
+// ============================================================================
+
+/dts-v1/;
+/plugin/;
+
+/ {
+    compatible = "rockchip,rk3588";
+};
+
+&i2c6 {
+    clock-frequency = <50000>;
+};
